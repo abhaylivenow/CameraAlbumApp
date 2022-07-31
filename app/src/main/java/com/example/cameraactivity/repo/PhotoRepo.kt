@@ -9,9 +9,7 @@ class PhotoRepo(
 ) {
     suspend fun insertPhoto(photoModel: PhotoModel) = photoDatabase.getPhotoDao().insertPhoto(photoModel)
 
-    suspend fun getAllPhotos() : List<PhotoModel> = photoDatabase.getPhotoDao().getAllPhotos()
+    fun getAllPhotos() : List<PhotoModel> = photoDatabase.getPhotoDao().getAllPhotos()
 
-    suspend fun deleteAllPhoto() = photoDatabase.getPhotoDao().deleteAllPhoto()
-
-    suspend fun getPhotoByAlbum(albumName: String) : List<PhotoModel> = photoDatabase.getPhotoDao().getPhotoByAlbum(albumName)
+    fun getPhotoByAlbum(albumName: String) : List<PhotoModel> = photoDatabase.getPhotoDao().getPhotoByAlbum(albumName)
 }
