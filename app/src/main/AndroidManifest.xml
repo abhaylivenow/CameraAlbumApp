@@ -21,10 +21,10 @@
         android:theme="@style/Theme.CameraActivity"
         tools:targetApi="31">
         <activity
-            android:name=".ui.FullPhotoActivity"
+            android:name=".ui.activities.FullPhotoActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,13 +33,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.CameraActivity"
+            android:name=".ui.activities.CameraActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.AlbumActivity"
+            android:name=".ui.activities.AlbumActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.PhotoActivity"
+            android:name=".ui.activities.PhotoActivity"
             android:exported="false" />
     </application>
 

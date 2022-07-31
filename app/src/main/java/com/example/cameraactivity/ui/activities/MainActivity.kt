@@ -1,37 +1,29 @@
-package com.example.cameraactivity.ui
+package com.example.cameraactivity.ui.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import com.example.cameraactivity.R
+import com.example.cameraactivity.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var btnCamera: Button
-    private lateinit var btnAlbum: Button
+    private lateinit var viewBinding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        viewBinding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(viewBinding.root)
 
-        initViews()
-
-        btnCamera.setOnClickListener {
+        viewBinding.btnCamera.setOnClickListener {
             startActivity(
                 Intent(this, CameraActivity::class.java)
             )
         }
 
-        btnAlbum.setOnClickListener {
+        viewBinding.btnAlbum.setOnClickListener {
             startActivity(
                 Intent(this, AlbumActivity::class.java)
             )
         }
-    }
-
-    private fun initViews() {
-        btnCamera = findViewById(R.id.btn_camera)
-        btnAlbum = findViewById(R.id.btn_album)
     }
 }

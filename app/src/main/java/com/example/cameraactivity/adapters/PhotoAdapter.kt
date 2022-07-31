@@ -2,22 +2,16 @@ package com.example.cameraactivity.adapters
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
-import android.os.Environment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.example.cameraactivity.R
 import com.example.cameraactivity.model.PhotoModel
-import com.example.cameraactivity.ui.FullPhotoActivity
-import com.squareup.picasso.Picasso
+import com.example.cameraactivity.ui.activities.FullPhotoActivity
 import java.io.File
 
 class PhotoAdapter(
@@ -30,7 +24,7 @@ class PhotoAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.photo_layout,parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.photo_layout, parent, false)
         return ViewHolder(view)
     }
 
@@ -45,8 +39,8 @@ class PhotoAdapter(
             .into(holder.photo)
 
         holder.itemView.setOnClickListener {
-            val intent = Intent(context,FullPhotoActivity::class.java)
-            intent.putExtra("album_location",actualLocation)
+            val intent = Intent(context, FullPhotoActivity::class.java)
+            intent.putExtra("album_location", actualLocation)
             context.startActivity(intent)
         }
     }

@@ -1,23 +1,22 @@
-package com.example.cameraactivity.ui
+package com.example.cameraactivity.ui.activities
 
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageView
 import com.bumptech.glide.Glide
-import com.example.cameraactivity.R
+import com.example.cameraactivity.databinding.ActivityFullPhotoBinding
 import java.io.File
 
 class FullPhotoActivity : AppCompatActivity() {
 
-    private lateinit var fullPhoto: ImageView
+    private lateinit var viewBinding: ActivityFullPhotoBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_full_photo)
+        viewBinding = ActivityFullPhotoBinding.inflate(layoutInflater)
+        setContentView(viewBinding.root)
 
         supportActionBar?.hide()
-        initViews()
 
         val imageLocation = intent.getStringExtra("album_location")
         imageLocation?.let {
@@ -25,11 +24,7 @@ class FullPhotoActivity : AppCompatActivity() {
             val uri = Uri.fromFile(imageFile)
             Glide.with(this)
                 .load(uri)
-                .into(fullPhoto)
+                .into(viewBinding.fullImage)
         }
-    }
-
-    private fun initViews() {
-        fullPhoto = findViewById(R.id.full_image)
     }
 }

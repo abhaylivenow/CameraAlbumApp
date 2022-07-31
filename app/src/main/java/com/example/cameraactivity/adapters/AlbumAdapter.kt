@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cameraactivity.R
 import com.example.cameraactivity.model.AlbumModel
-import com.example.cameraactivity.ui.PhotoActivity
+import com.example.cameraactivity.ui.activities.PhotoActivity
 
 class AlbumAdapter(
     private val listOfAlbum: List<AlbumModel>,
@@ -21,7 +21,7 @@ class AlbumAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.album_layout,parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.album_layout, parent, false)
         return ViewHolder(view)
     }
 
@@ -30,8 +30,8 @@ class AlbumAdapter(
         holder.albumName.text = "Album: ${album.albumNumber}"
 
         holder.itemView.setOnClickListener {
-            val intent = Intent(context,PhotoActivity::class.java)
-            intent.putExtra("album_number",album.albumNumber)
+            val intent = Intent(context, PhotoActivity::class.java)
+            intent.putExtra("album_number", album.albumNumber)
             context.startActivity(
                 intent
             )

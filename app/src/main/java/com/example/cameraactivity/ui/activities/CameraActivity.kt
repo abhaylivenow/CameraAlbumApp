@@ -1,15 +1,13 @@
-package com.example.cameraactivity.ui
+package com.example.cameraactivity.ui.activities
 
 import android.Manifest
 import android.content.Context
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.camera.core.CameraSelector
@@ -17,11 +15,11 @@ import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.camera.view.PreviewView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.cameraactivity.R
+import com.example.cameraactivity.databinding.ActivityCameraBinding
 import com.example.cameraactivity.db.PhotoDatabase
 import com.example.cameraactivity.model.PhotoModel
 import com.example.cameraactivity.repo.PhotoRepo
@@ -42,8 +40,7 @@ class CameraActivity : AppCompatActivity() {
     private var imageCapture: ImageCapture? = null
     private lateinit var outputDirectory: File
     private lateinit var cameraExecutor: ExecutorService
-    private lateinit var viewFinder: PreviewView
-    private lateinit var btnCapture: Button
+    private lateinit var viewBinding: ActivityCameraBinding
 
     private lateinit var viewModel: CameraActivityViewModel
     private lateinit var photoDatabase: PhotoDatabase
@@ -54,15 +51,14 @@ class CameraActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_camera)
+        viewBinding = ActivityCameraBinding.inflate(layoutInflater)
+        setContentView(viewBinding.root)
 
         supportActionBar?.hide()
 
         // sharedPref is used to get the album for all photos clicked in single go
         // getCurrentAlbumNumber is same for all those photos that is clicked in single go
         albumNumber = getCurrentAlbumNumber()
-
-        initViews()
         initResources()
 
         if (allPermissionsGranted()) {
@@ -71,7 +67,7 @@ class CameraActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
         }
 
-        btnCapture.setOnClickListener {
+        viewBinding.cameraCaptureButton.setOnClickListener {
             takePhoto()
             putInSharedPref(albumNumber!! +1)
             Log.i("here11",getCurrentAlbumNumber().toString())
@@ -137,7 +133,7 @@ class CameraActivity : AppCompatActivity() {
             val preview = Preview.Builder()
                 .build()
                 .also {
-                    it.setSurfaceProvider(viewFinder.surfaceProvider)
+                    it.setSurfaceProvider(viewBinding.viewFinder.surfaceProvider)
                 }
 
             imageCapture = ImageCapture.Builder().build()
@@ -192,11 +188,6 @@ class CameraActivity : AppCompatActivity() {
                 finish()
             }
         }
-    }
-
-    private fun initViews() {
-        viewFinder = findViewById(R.id.viewFinder)
-        btnCapture = findViewById(R.id.camera_capture_button)
     }
 
     private fun initResources() {
