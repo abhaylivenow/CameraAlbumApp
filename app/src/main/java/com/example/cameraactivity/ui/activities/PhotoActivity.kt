@@ -29,15 +29,13 @@ class PhotoActivity : AppCompatActivity() {
         setContentView(viewBinding.root)
 
         supportActionBar?.hide()
-        initResources()
 
         val currentAlbumNumber = intent.getStringExtra("album_number")
-
         currentAlbumNumber?.let {
-            viewModel.getAllPhoto(it)
+            initResources(it)
         }
 
-        viewModel.getPhotos.observe(this) {
+        viewModel.photoLiveData.observe(this) {
             listOfPhoto.addAll(it)
             photoAdapter = PhotoAdapter(listOfPhoto,this)
             viewBinding.apply {
@@ -47,10 +45,10 @@ class PhotoActivity : AppCompatActivity() {
         }
     }
 
-    private fun initResources() {
+    private fun initResources(currentAlbumNumber: String) {
         photoDatabase = PhotoDatabase(this)
         repo = PhotoRepo(photoDatabase)
-        vmFactory = PhotoActivityVMFactory(repo)
+        vmFactory = PhotoActivityVMFactory(repo, currentAlbumNumber)
         viewModel = ViewModelProvider(this,vmFactory)[PhotoActivityViewModel::class.java]
     }
 }

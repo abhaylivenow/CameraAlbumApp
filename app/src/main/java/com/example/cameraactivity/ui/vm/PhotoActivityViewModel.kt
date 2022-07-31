@@ -11,18 +11,19 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class PhotoActivityViewModel(
-    private val repo: PhotoRepo
+    private val repo: PhotoRepo,
+    private val albumNumber: String
 ) : ViewModel() {
-    //suspend fun getAllPhoto() = repo.getAllPhotos()
-    val getPhotos: MutableLiveData<List<PhotoModel>> = MutableLiveData()
+    private val _photoLiveData: MutableLiveData<List<PhotoModel>> = MutableLiveData()
+    val photoLiveData: LiveData<List<PhotoModel>> = _photoLiveData
 
-//    init {
-//        getAllPhoto()
-//    }
+    init {
+        getAllPhoto()
+    }
 
-    fun getAllPhoto(albumNumber: String) {
+    private fun getAllPhoto() {
         viewModelScope.launch(Dispatchers.IO) {
-            getPhotos.postValue(repo.getPhotoByAlbum(albumNumber))
+            _photoLiveData.postValue(repo.getPhotoByAlbum(albumNumber))
         }
     }
 }
