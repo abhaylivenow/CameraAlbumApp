@@ -5,9 +5,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "photo_table")
 data class PhotoModel(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int?,
     val location: String,
+    @PrimaryKey
     val timeStamp: String,
     val albumName: String
 )

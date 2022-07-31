@@ -2,6 +2,7 @@ package com.example.cameraactivity.ui.activities
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
@@ -109,12 +110,11 @@ class CameraActivity : AppCompatActivity() {
                             PhotoModel(
                                 location = savedUri.toString(),
                                 timeStamp = LocalDateTime.now().toString(),
-                                albumName = albumNumber.toString(),
-                                id = null
+                                albumName = albumNumber.toString()
                             )
                         )
                     }
-                    val msg = "Photo capture succeeded: $savedUri"
+                    val msg = "Photo Clicked.."
                     Toast.makeText(baseContext, msg, Toast.LENGTH_LONG).show()
                     Log.d(TAG, msg)
                 }
@@ -214,6 +214,17 @@ class CameraActivity : AppCompatActivity() {
         private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
         private const val REQUEST_CODE_PERMISSIONS = 20
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+    }
+
+    // onBackPressed is handled so that album count update instantly
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(
+            Intent(
+                this,
+                AlbumActivity::class.java
+            )
+        )
     }
 
     override fun onDestroy() {

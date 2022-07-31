@@ -1,6 +1,7 @@
 package com.example.cameraactivity.ui.activities
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
@@ -20,6 +21,8 @@ class AlbumActivity : AppCompatActivity() {
         viewBinding = ActivityAlbumBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
 
+        supportActionBar?.hide()
+
         val totalAlbum = getCurrentAlbumNumber() - 1
         val listOfAlbum = mutableListOf<AlbumModel>()
 
@@ -29,7 +32,13 @@ class AlbumActivity : AppCompatActivity() {
 
         viewBinding.apply {
             albumRv.adapter = AlbumAdapter(listOfAlbum, this@AlbumActivity)
-            albumRv.layoutManager = GridLayoutManager(this@AlbumActivity, 2)
+            albumRv.layoutManager = GridLayoutManager(this@AlbumActivity, 3)
+        }
+
+        viewBinding.btnGoToCamera.setOnClickListener {
+            startActivity(
+                Intent(this,CameraActivity::class.java)
+            )
         }
     }
 

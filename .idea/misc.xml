@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/bg_bottom.xml" value="0.1725" />
         <entry key="app/src/main/res/drawable/bg_capture_btn.xml" value="0.1725" />
         <entry key="app/src/main/res/layout/activity_album.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_camera.xml" value="0.165" />
@@ -10,6 +11,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.29583333333333334" />
         <entry key="app/src/main/res/layout/activity_photo.xml" value="0.2065972222222222" />
         <entry key="app/src/main/res/layout/album_layout.xml" value="0.2065972222222222" />
+        <entry key="app/src/main/res/layout/bg_bottom_sheet.xml" value="0.20590277777777777" />
         <entry key="app/src/main/res/layout/photo_layout.xml" value="0.20590277777777777" />
       </map>
     </option>

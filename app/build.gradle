@@ -9,8 +9,8 @@ android {
 
     defaultConfig {
         applicationId "com.example.cameraactivity"
-        minSdk 21
-        targetSdk 32
+        minSdk 23
+        targetSdk 29
         compileSdkVersion 32
         versionCode 1
         versionName "1.0"
