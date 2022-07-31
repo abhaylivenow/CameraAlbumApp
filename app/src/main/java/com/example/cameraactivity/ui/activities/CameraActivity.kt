@@ -71,29 +71,21 @@ class CameraActivity : AppCompatActivity() {
         viewBinding.cameraCaptureButton.setOnClickListener {
             takePhoto()
             putInSharedPref(albumNumber!! +1)
-            Log.i("here11",getCurrentAlbumNumber().toString())
         }
         outputDirectory = getOutputDirectory()
         cameraExecutor = Executors.newSingleThreadExecutor()
     }
 
     private fun takePhoto() {
-        // Get a stable reference of the
-        // modifiable image capture use case
         val imageCapture = imageCapture ?: return
 
-        // Create time-stamped output file to hold the image
         val photoFile = File(
             outputDirectory,
             SimpleDateFormat(FILENAME_FORMAT, Locale.US).format(System.currentTimeMillis()) + ".jpg"
         )
 
-        // Create output options object which contains file + metadata
         val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
 
-        // Set up image capture listener,
-        // which is triggered after photo has
-        // been taken
         imageCapture.takePicture(
             outputOptions,
             ContextCompat.getMainExecutor(this),
@@ -124,12 +116,9 @@ class CameraActivity : AppCompatActivity() {
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
 
-        cameraProviderFuture.addListener(Runnable {
+        cameraProviderFuture.addListener({
 
-            // Used to bind the lifecycle of cameras to the lifecycle owner
             val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
-
-            // Preview
             val preview = Preview.Builder()
                 .build()
                 .also {
@@ -138,18 +127,13 @@ class CameraActivity : AppCompatActivity() {
 
             imageCapture = ImageCapture.Builder().build()
 
-            // Select back camera as a default
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
             try {
-                // Unbind use cases before rebinding
                 cameraProvider.unbindAll()
-
-                // Bind use cases to camera
                 cameraProvider.bindToLifecycle(
                     this, cameraSelector, preview, imageCapture
                 )
-
             } catch (exc: Exception) {
                 Log.e(TAG, "Use case binding failed", exc)
             }

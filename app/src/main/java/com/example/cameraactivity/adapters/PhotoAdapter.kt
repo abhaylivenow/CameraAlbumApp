@@ -24,7 +24,13 @@ class PhotoAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.photo_layout, parent, false)
+        val view = LayoutInflater.from(
+            parent.context
+        ).inflate(
+            R.layout.photo_layout,
+            parent,
+            false
+        )
         return ViewHolder(view)
     }
 

@@ -7,6 +7,19 @@
     android:background="@color/off_black"
     tools:context=".ui.activities.AlbumActivity">
 
+    <TextView
+        android:id="@+id/empty_album_text"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        android:text="No Album found..."/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/album_rv"
         android:layout_marginTop="12dp"

@@ -7,6 +7,9 @@ import com.example.cameraactivity.model.PhotoModel
 class PhotoRepo(
     private val photoDatabase: PhotoDatabase
 ) {
-    suspend fun insertPhoto(photoModel: PhotoModel) = photoDatabase.getPhotoDao().insertPhoto(photoModel)
-    fun getPhotoByAlbum(albumName: String) : List<PhotoModel> = photoDatabase.getPhotoDao().getPhotoByAlbum(albumName)
+    suspend fun insertPhoto(photoModel: PhotoModel) =
+        photoDatabase.getPhotoDao().insertPhoto(photoModel)
+
+    fun getPhotoByAlbum(albumName: String): List<PhotoModel> =
+        photoDatabase.getPhotoDao().getPhotoByAlbum(albumName)
 }

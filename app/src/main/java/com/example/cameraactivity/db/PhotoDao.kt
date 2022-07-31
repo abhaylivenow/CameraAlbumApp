@@ -9,13 +9,7 @@ interface PhotoDao {
     @Insert
     suspend fun insertPhoto(photo: PhotoModel)
 
-    @Query("SELECT * FROM photo_table")
-    fun getAllPhotos(): List<PhotoModel>
-
     @Query("SELECT * FROM photo_table WHERE albumName = :albumName")
     fun getPhotoByAlbum(albumName: String) : List<PhotoModel>
-
-    @Query("DELETE FROM photo_table")
-    suspend fun deleteAllPhoto()
 
 }

@@ -2,15 +2,17 @@ package com.example.cameraactivity.ui.activities
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.IntentCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.cameraactivity.adapters.AlbumAdapter
 import com.example.cameraactivity.databinding.ActivityAlbumBinding
-import com.example.cameraactivity.db.PhotoDatabase
 import com.example.cameraactivity.model.AlbumModel
-import com.example.cameraactivity.repo.PhotoRepo
+
 
 class AlbumActivity : AppCompatActivity() {
 
@@ -24,10 +26,17 @@ class AlbumActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         val totalAlbum = getCurrentAlbumNumber() - 1
+
         val listOfAlbum = mutableListOf<AlbumModel>()
 
         for (i in 1..totalAlbum) {
             listOfAlbum.add(AlbumModel(i.toString()))
+        }
+
+        if (listOfAlbum.size == 0) {
+            viewBinding.emptyAlbumText.visibility = View.VISIBLE
+        } else {
+            viewBinding.emptyAlbumText.visibility = View.GONE
         }
 
         viewBinding.apply {
@@ -36,8 +45,10 @@ class AlbumActivity : AppCompatActivity() {
         }
 
         viewBinding.btnGoToCamera.setOnClickListener {
+            val intent = Intent(this, CameraActivity::class.java)
+            intent.addFlags(FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(
-                Intent(this,CameraActivity::class.java)
+                intent
             )
         }
     }
