@@ -35,7 +35,11 @@ class PhotoDatabaseTest : TestCase() {
 
     @Test
     fun `add photo to database`() = runBlocking {
-        val photo = PhotoModel(1, "some location" ,LocalDateTime.now().toString(),"1")
+        val photo = PhotoModel(
+            location = "some location",
+            timeStamp = LocalDateTime.now().toString(),
+            albumName = "1"
+        )
         dao.insertPhoto(photo)
         val photos = dao.getPhotoByAlbum("1")
         assertTrue(photos.contains(photo))
